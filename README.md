@@ -15,6 +15,7 @@ public static void main(String[] args) throws Exception {
 
   	server.start();
   }
+
 And to implement a handler, you focus on business logic:
 
 class ExampleMsgHandler1 implements IHandler {
@@ -27,6 +28,7 @@ class ExampleMsgHandler1 implements IHandler {
 		return "handler1: " + request;
 	}
 }
+
 As you add the handler to the server, it gets wrapped to a proper worker and interacts with the server.
 
 Distributed
@@ -39,9 +41,11 @@ public void startServer() throws Exception {
 	ZmqServer server = new ZmqServer(clientPort, workerPort);
 	server.start();
 }
+
 Then create more workers on remote hosts:
 
 public void startWorker(int index) {
 	ZmqWorker worker = new ZmqWorker(serverHost, workerPort, new ExampleBasicHandler(), index);
 	new Thread(worker).start();
 }
+
